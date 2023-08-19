@@ -1,0 +1,189 @@
+{
+    "environment": {
+        "name": "Mountain Car",
+        "info": {
+            "total": 21,
+            "parameters": {
+                "force": [
+                    0.001
+                ],
+                "gravity": [
+                    0.0025
+                ],
+                "max_speed": [
+                    0.07
+                ],
+                "angle_perturbation": [
+                    -10,
+                    -9,
+                    -8,
+                    -7,
+                    -6,
+                    -5,
+                    -4,
+                    -3,
+                    -2,
+                    -1,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                ]
+            }
+        },
+        "configs": [
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": -10
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": -9
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": -8
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": -7
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": -6
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": -5
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": -4
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": -3
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": -2
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": -1
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": 0
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": 1
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": 2
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": 3
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": 4
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": 5
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": 6
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": 7
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": 8
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": 9
+            },
+            {
+                "force": 0.001,
+                "gravity": 0.0025,
+                "max_speed": 0.07,
+                "angle_perturbation": 10
+            }
+        ]
+    },
+    "agent": {
+        "gamma": 0.99,
+        "episodes": 20000,
+        "lr": 1.0,
+        "lr_min": 0.01,
+        "lr_decay": 0.999,
+        "epsilon": 1.0,
+        "epsilon_decay": 0.99,
+        "epsilon_min": 0.001,
+        "discrete": [
+            32,
+            32
+        ],
+        "count": 20,
+        "target": -120.0,
+        "break_on_solve": true,
+        "reward_shaper": null,
+        "render_each": 20001
+    }
+}

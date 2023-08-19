@@ -1,0 +1,28 @@
+{
+    "filters": {
+        "reward_last_average": [
+            -120.0,
+            Infinity
+        ],
+        "angle_perturbation": [
+            0
+        ]
+    },
+    "selections": {
+        "max_try": 100,
+        "agent_sample": "Filter",
+        "sample_count": 100,
+        "sample_reward": -120,
+        "best_observation": "Yes"
+    },
+    "encoder_data": {
+        "encoder_name": "Dynamic Encoding",
+        "encode_count": 4
+    },
+    "hmm": {
+        "n_components": 2,
+        "n_iter": 100,
+        "n_steps": 5,
+        "type": "Poisson"
+    }
+}

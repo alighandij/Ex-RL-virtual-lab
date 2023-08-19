@@ -1,0 +1,92 @@
+{
+    "environment": {
+        "name": "Ball Beam",
+        "info": {
+            "total": 20,
+            "parameters": {
+                "beam_length": [
+                    0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75,
+                    3.0, 3.25, 3.5, 3.75, 4.0, 4.25, 4.5, 4.75, 5.0
+                ]
+            }
+        },
+        "configs": [
+            {
+                "beam_length": 0.25
+            },
+            {
+                "beam_length": 0.5
+            },
+            {
+                "beam_length": 0.75
+            },
+            {
+                "beam_length": 1.0
+            },
+            {
+                "beam_length": 1.25
+            },
+            {
+                "beam_length": 1.5
+            },
+            {
+                "beam_length": 1.75
+            },
+            {
+                "beam_length": 2.0
+            },
+            {
+                "beam_length": 2.25
+            },
+            {
+                "beam_length": 2.5
+            },
+            {
+                "beam_length": 2.75
+            },
+            {
+                "beam_length": 3.0
+            },
+            {
+                "beam_length": 3.25
+            },
+            {
+                "beam_length": 3.5
+            },
+            {
+                "beam_length": 3.75
+            },
+            {
+                "beam_length": 4.0
+            },
+            {
+                "beam_length": 4.25
+            },
+            {
+                "beam_length": 4.5
+            },
+            {
+                "beam_length": 4.75
+            },
+            {
+                "beam_length": 5.0
+            }
+        ]
+    },
+    "agent": {
+        "gamma": 0.99,
+        "episodes": 20000,
+        "lr": 1.0,
+        "lr_min": 0.01,
+        "lr_decay": 0.999,
+        "epsilon": 1.0,
+        "epsilon_decay": 0.99,
+        "epsilon_min": 0.001,
+        "discrete": [8, 8, 8],
+        "count": 20,
+        "target": 50.0,
+        "break_on_solve": true,
+        "reward_shaper": null,
+        "render_each": 20001
+    }
+}

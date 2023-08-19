@@ -1,0 +1,34 @@
+{
+    "filters": {
+        "reward_last_average": [
+            200.0,
+            Infinity
+        ],
+        "gravity": [
+            9.8
+        ],
+        "masspole": [
+            0.1
+        ],
+        "force_mag": [
+            10.0
+        ]
+    },
+    "selections": {
+        "max_try": 100,
+        "agent_sample": "Filter",
+        "sample_count": 1,
+        "sample_reward": 200,
+        "best_observation": "Filter"
+    },
+    "encoder_data": {
+        "encoder_name": "Dynamic Encoding XY",
+        "encode_count": 4
+    },
+    "hmm": {
+        "n_components": 2,
+        "n_iter": 100,
+        "n_steps": 5,
+        "type": "Poisson"
+    }
+}
