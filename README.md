@@ -57,19 +57,27 @@ streamlit run App.py
 
 ## 📄 Pages
 
-1. _**👷 Pipeline QTable**_: for Training `QTableAgents` with customized environments.
+### 👷 Pipeline QTable
+
+for Training `QTableAgents` with customized environments.
 
 ![image_pipeline_q_table](./assets/image_pipeline_q_table.png)
 
-2. _**🎮 Review Agent**_: For see information of an agent and play it.
+### 🎮 Review Agent
+
+For see information of an agent and play it.
 
 ![image_review_agent](assets/image_review_agent.png)
 
-3. _**🕵️ HMM Trainer**_: For training HMM based on trained `QTableAgents`.
+### 🕵️ HMM Trainer
+
+For training HMM based on trained `QTableAgents`.
 
 ![image_hmm_trainer](assets/image_hmm_trainer.png)
 
-4. _**🏃‍♂️Ex-RL**_: To execute an Ex-RL algorithm with a trained HMM in a different environment.
+### 🏃‍♂️Ex-RL
+
+To execute an Ex-RL algorithm with a trained HMM in a different environment.
 
 ![image_ex_rl](assets/image_ex_rl.png)
 
