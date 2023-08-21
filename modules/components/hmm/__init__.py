@@ -4,12 +4,13 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from stqdm import stqdm
+from hmmlearn.hmm import PoissonHMM, MultinomialHMM, GaussianHMM, GMMHMM
 from modules.pools import Pool
 from modules.utils import get_time_str, heatmap, save_json
-from modules.components import Components
 from exrl.hmm_model import HMMModel
 from modules.environments.selector import EnvSelector
-from hmmlearn.hmm import PoissonHMM, MultinomialHMM, GaussianHMM, GMMHMM
+from modules.components import Components
 
 NO = "No"
 YES = "Yes"
@@ -20,7 +21,7 @@ class HMMPage:
     @staticmethod
     def set_configs(st: streamlit):
         st.set_page_config(
-            page_icon="🤖", page_title="HMM Trainer", initial_sidebar_state="expanded"
+            page_icon="🕵️", page_title="HMM Trainer", initial_sidebar_state="expanded"
         )
         Components.set_center(st)
 
@@ -172,16 +173,16 @@ class HMMPage:
         agents = HMMPage._load_agents(pool, filters, selections)
         samples = {}
         for agent_id, agent in agents.items():
-            cnt_try = 0
             samples[agent_id] = []
-            # SAMPLE FROM AGENTS WITH MINIMUM REWARD
-            while (len(samples[agent_id]) < sample_count) and (cnt_try < max_try):
+            for _ in (pbar := stqdm(range(max_try))):
                 reward, obs = agent.play(False)
-                if reward < sample_reward:
-                    cnt_try += 1
-                    continue
-                samples[agent_id].append(obs)
-
+                if reward >= sample_reward:
+                    samples[agent_id].append(obs)
+                    pbar.set_postfix(
+                        {"sampled": f"{len(samples[agent_id])} / {sample_count}"}
+                    )
+                if len(samples[agent_id]) == sample_count:
+                    break
             if len(samples[agent_id]) == 0:
                 del samples[agent_id]
 

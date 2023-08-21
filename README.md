@@ -20,6 +20,7 @@
 - [📄 Pages](#pages)
 - [👥 Contributors](#contributors)
 - [🗣️ Citation](#citation)
+- [📚 Libraries](#libraries)
 
 * <details>
       <summary>
@@ -98,6 +99,23 @@ The contributors, listed in chronological order, are:
 ```bibtex
 
 ```
+
+<a name="libraries"></a>
+
+## 📚 Libraries
+
+- [`tqdm/tqdm`](https://github.com/tqdm/tqdm)
+- [`Wirg/stqdm`](https://github.com/Wirg/stqdm)
+- [`openai/gym`](https://github.com/openai/gym)
+- [`numpy/numpy`](https://github.com/numpy/numpy)
+- [`scipy/scipy`](https://github.com/scipy/scipy)
+- [`mwaskom/seaborn`](https://github.com/mwaskom/seaborn)
+- [`hmmlearn/hmmlearn`](https://github.com/hmmlearn/hmmlearn)
+- [`pandas-dev/pandas`](https://github.com/pandas-dev/pandas)
+- [`streamlit/streamlit`](https://github.com/streamlit/streamlit)
+- [`matplotlib/matplotlib`](https://github.com/matplotlib/matplotlib)
+- modified version of [`simon-larsson/ballbeam-gym`](https://github.com/simon-larsson/ballbeam-gym)
+
 
 <a name="doc"></a>
 

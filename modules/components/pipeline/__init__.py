@@ -198,7 +198,7 @@ class PipelinePage:
     @staticmethod
     def set_config(st):
         st.set_page_config(
-            page_icon="🤖",
+            page_icon="👷",
             page_title="Agent Pool Creator",
             initial_sidebar_state="expanded",
         )

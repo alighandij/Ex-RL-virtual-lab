@@ -2,8 +2,8 @@ import streamlit as st
 from modules.components import Components
 
 st.set_page_config(
-    page_icon="🤖",
-    page_title="Play Agent",
+    page_icon="🎮",
+    page_title="Review Agent",
     initial_sidebar_state="expanded",
 )
 
