@@ -2,12 +2,13 @@
 
 # Ex-RL Virtual Laboratory 🧪
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
 ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
 ![Matplotlib](https://img.shields.io/badge/Matplotlib-%23ffffff.svg?style=for-the-badge&logo=Matplotlib&logoColor=black)
 <img alt="Streamlit" src="assets/streamlit.jpg" height="30"/>
-<img alt="Gym" src="https://www.gymlibrary.dev/_static/img/gym_logo_white.svg" height="30" style="background-color: black;"/>
+<img alt="Gym" src="https://img.stackshare.io/service/12581/gym.png" height="35" style="background-color: black;"/>
 <img alt="tqdm" src="https://avatars.githubusercontent.com/u/12731565?s=280&v=4" height="30" />
 
 👋 welcome to the official repository of **_[Ex-RL: Experience-Based Reinforcement Learning]()_**
@@ -20,6 +21,7 @@
 - [📄 Pages](#pages)
 - [👥 Contributors](#contributors)
 - [🗣️ Citation](#citation)
+- [🤝 Contributing](#contributing)
 - [📚 Libraries](#libraries)
 
 * <details>
@@ -99,6 +101,12 @@ The contributors, listed in chronological order, are:
 ```bibtex
 
 ```
+
+<a name="contributing"></a>
+
+## 🤝 Contributing
+
+Contributions to this project are welcome. If you have any ideas or suggestions, feel free to open an issue or submit a pull request.
 
 <a name="libraries"></a>
 
@@ -262,3 +270,4 @@ ENVIRONMENTS = {
 ### `EnvSelector`
 
 the `EnvSelector` allows you to effortlessly access environment configurations. This streamlined tool grants you quick access to a variety of settings and parameters associated with different environments.
+
