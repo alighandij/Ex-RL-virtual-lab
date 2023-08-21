@@ -66,13 +66,13 @@ for Training `QTableAgents` with customized environments.
 
 ### 🎮 Review Agent
 
-For see information of an agent and play it.
+To view information about an agent and play it.
 
 ![review](assets/review.gif)
 
 ### 🕵️ HMM Trainer
 
-For training HMM based on trained `QTableAgents`.
+For training an HMM based on trained `QTableAgents`.
 
 ![hmm](assets/hmm.gif)
 
@@ -116,12 +116,11 @@ The contributors, listed in chronological order, are:
 - [`matplotlib/matplotlib`](https://github.com/matplotlib/matplotlib)
 - modified version of [`simon-larsson/ballbeam-gym`](https://github.com/simon-larsson/ballbeam-gym)
 
-
 <a name="doc"></a>
 
 ## 🔨 Environment Documentation
 
-for adding a new environment to pipeline create folder at `modules/environments/envs` with following structure:
+To add a new environment to the pipeline, create a folder at `modules/environments/envs` with the following structure:
 
 ```text
 your_awesome_env
@@ -137,8 +136,8 @@ your_awesome_env
 
 ### `create.py`
 
-this file should contains a function called `create` for making & customizing the environments.
-_**NOTE**_: don not use `gym.create` instead use the source code from OpenAI gym unless it supports customization directly. (see `cartpole`)
+This file should contain a function called `create` for creating and customizing the environments.
+_**⚠️NOTE**_: Avoid using `gym.create`instead, refer to the source code from OpenAI Gym unless it supports direct customization (as demonstrated in the `cartpole` example).
 
 ```python
 def create(**kwargs):
@@ -155,15 +154,13 @@ def create(**kwargs):
     return env
 ```
 
-_**NOTE* #1*_: for using gym environments make sure you wrap them with `GymWrapper` from `exrl.gym_wrapper`.
-
-_**NOTE #2**_: all environments should have `is_goal_reached` method.
+_**⚠️NOTE**_: When using gym environments with the latest version of Gymnasium, make sure to wrap them using `GymWrapper` from `exrl.gym_wrapper`.
 
 <a name="encoders"></a>
 
 ### `encoders`
 
-define your state encoders in this folder and then register them in `__init__.py`:
+Define your state encoders in this folder and then register them in the `__init__.py` file:
 
 ```python
 from .your_awesome_encoder import your_awesome_encoder
@@ -177,9 +174,9 @@ ENCODERS = {
 
 ### Encoder
 
-encoder is a function that takes two arguments:
+An encoder is a function that takes two arguments:
 
-1. `samples` which is a dict contains `agent_id` and samples:
+1. `samples`, which is a dictionary containing `agent_id` and samples:
 
 ```python
 samples = {
@@ -199,7 +196,7 @@ samples = {
 }
 ```
 
-2. `pool` for get extra information about the agent.
+2. `pool` to obtain additional information about the agent.
 
 **_Example_**:
 
@@ -219,7 +216,7 @@ def encoding_function(samples: dict, pool):
 
 ### `__init__.py`
 
-describe your env like this
+Describe your environment using the provided structure.
 
 ```python
 from .create import create
@@ -237,12 +234,10 @@ YOUR_ENV = {
             },
         },
         "agent_configs": {
-            # This Dictionary is optional
-            # it only affect the Parameter Selection
-            # And make it easier
-            "discrete": 32,
+            # This dictionary is optional. It only affects the parameter selection and makes the process more convenient.
             "count": 20,
             "target": -120
+            "discrete": 32,
             "reward_shaper": reward_shaper
         },
         "encoders": ENCODERS
@@ -252,9 +247,9 @@ YOUR_ENV = {
 
 <a name="register"></a>
 
-### 🖊️ Register & `EnvSelector`
+### 🖊️ Register
 
-after adding your agents register your environment in `modules/environments/selector.py` like this:
+After adding your agents, register your environment in `modules/environments/selector.py` as follows:
 
 ```python
 from .envs.your_awesome_env import YOUR_ENV
@@ -264,4 +259,6 @@ ENVIRONMENTS = {
 }
 ```
 
-you can use `EnvSelector` To access environments configs.
+### `EnvSelector`
+
+the `EnvSelector` allows you to effortlessly access environment configurations. This streamlined tool grants you quick access to a variety of settings and parameters associated with different environments.
