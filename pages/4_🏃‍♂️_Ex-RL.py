@@ -1,5 +1,4 @@
 import streamlit as st
-from modules.pools import Pool
 from modules.components import Components
 from modules.environments import EnvSelector
 from modules.components.exrl import ExRLPage

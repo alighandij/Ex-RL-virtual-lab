@@ -11,7 +11,7 @@ from modules.environments.selector import EnvSelector
 from exrl.utils import save_np_arr
 from exrl.history import History
 from exrl.agents.qlearn import QLearning
-
+from stqdm import stqdm
 
 class Config:
     def __init__(
@@ -29,6 +29,7 @@ class Config:
         self.agent = QLearning(
             self.env,
             **agent_config,
+            _tqdm=stqdm
         )
         self.result = {}
         self.save_path = os.path.join(save_path, self.id)

@@ -41,7 +41,7 @@ class QLearning(Agent):
             target,
             reward_shaper,
             break_on_solve,
-            _tqdm
+            _tqdm,
         )
         self.discrete = Discrete(env, discrete)
         self.q_table = self.discrete.generate_table()
@@ -52,10 +52,10 @@ class QLearning(Agent):
     def get_result(self) -> dict:
         return {"q_table": self.q_table, **self.get_result_general()}
 
-    def update_q_table(self, s: np.ndarray, a, r: float, sn: np.ndarray):
+    def update_q_table(self, s: np.ndarray, a, r: float, sn: np.ndarray, done: bool):
         i = self.discrete(s) + (a,)
         td_err = r
-        if not self.env.is_goal_reached():
+        if not done:
             max_q = np.max(self.q_table[self.discrete(sn)])
             td_err += self.gamma * max_q - self.q_table[i]
         self.q_table[i] += self.lr * td_err
@@ -72,7 +72,7 @@ class QLearning(Agent):
             next_state, reward, done, _ = self.env.step(action)
             total_reward += reward
             reward = self.get_reward(state, next_state, reward, done)
-            self.update_q_table(state, action, reward, next_state)
+            self.update_q_table(state, action, reward, next_state, done)
             observations.append((state, next_state))
             state = next_state
         return total_reward, np.array(observations)

@@ -73,15 +73,15 @@ class ExQLearning(Agent):
         self.reward_shaper.seq.append(self.encode(s, sn))
 
     def store(self, s: np.ndarray, a: int, r: float, sn: np.ndarray, d: bool):
-        self._add(s, sn, d)
-        self.buffer.append((s, a, r, sn, self.env.is_goal_reached()))
+        self.buffer.append((s, a, r, sn, d))
+        self.reward_shaper.add(s, sn, d)
 
     def update_q_table(
-        self, s: np.ndarray, a, r: float, sn: np.ndarray, is_goal: bool
+        self, s: np.ndarray, a: int, r: float, sn: np.ndarray, done: bool
     ) -> None:
         i = self.discrete(s) + (a,)
         td_err = r
-        if not is_goal:
+        if not done:
             max_q = np.max(self.q_table[self.discrete(sn)])
             td_err += self.gamma * max_q - self.q_table[i]
         self.q_table[i] += self.lr * td_err
@@ -92,8 +92,10 @@ class ExQLearning(Agent):
         self.old_score = hmm_score
         return diff_score
 
-    def update_monte_carlo(self) -> None:
-        if len(self.buffer) < self.hmm_step:
+    def update_monte_carlo(self, done: bool) -> None:
+        if done and (len(self.buffer) > 0):
+            ...
+        elif (len(self.buffer) < self.hmm_step):
             return
 
         hmm_score = self.score()
@@ -119,7 +121,7 @@ class ExQLearning(Agent):
             next_state, reward, done, _ = self.env.step(action)
             total_reward += reward
             self.store(state, action, reward, next_state, done)
-            self.update_monte_carlo()
+            self.update_monte_carlo(done)
             observations.append((state, next_state))
             state = next_state
         self.reset()

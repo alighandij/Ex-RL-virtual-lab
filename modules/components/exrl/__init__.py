@@ -529,7 +529,7 @@ class ExRLPage:
         history = {"EX-RL": [], "Normal Q-Learning": []}
 
         for run in range(runs):
-            st.write(f"Run {run + 1} / {runs}")
+            st.write(f"### Run {run + 1} / {runs}")
             ql, exrl = ExRLPage.run_experiment(
                 st=st,
                 env=env,

@@ -93,6 +93,7 @@ class CartPoleEnv(gym.Env[np.ndarray, Union[int, np.ndarray]]):
         masspole: float = 0.1,
         force_mag: float = 10.0
     ) -> None:
+        
         self.gravity = gravity
         self.masscart = masscart
         self.masspole = masspole
@@ -130,6 +131,7 @@ class CartPoleEnv(gym.Env[np.ndarray, Union[int, np.ndarray]]):
         self.clock = None
         self.isopen = True
         self.state = None
+        self.step_counter = 0
 
         self.steps_beyond_terminated = None
 
@@ -141,6 +143,7 @@ class CartPoleEnv(gym.Env[np.ndarray, Union[int, np.ndarray]]):
         force = self.force_mag if action == 1 else -self.force_mag
         costheta = math.cos(theta)
         sintheta = math.sin(theta)
+        self.step_counter += 1
 
         # For the interested reader:
         # https://coneural.org/florian/papers/05_cart_pole.pdf
@@ -171,26 +174,32 @@ class CartPoleEnv(gym.Env[np.ndarray, Union[int, np.ndarray]]):
             or x > self.x_threshold
             or theta < -self.theta_threshold_radians
             or theta > self.theta_threshold_radians
+            or self.step_counter >= 500
+
         )
 
         if not terminated:
             reward = 1.0
-        elif self.steps_beyond_terminated is None:
-            # Pole just fell!
-            self.steps_beyond_terminated = 0
-            reward = 1.0
         else:
-            if self.steps_beyond_terminated == 0:
-                logger.warn(
-                    "You are calling 'step()' even though this "
-                    "environment has already returned terminated = True. You "
-                    "should always call 'reset()' once you receive 'terminated = "
-                    "True' -- any further steps are undefined behavior."
-                )
-            self.steps_beyond_terminated += 1
-            reward = 0.0
+            reward = 0
+        # if not terminated:
+        #     reward = 1.0
+        # elif self.steps_beyond_terminated is None:
+        #     # Pole just fell!
+        #     self.steps_beyond_terminated = 0
+        #     reward = 1.0
+        # else:
+        #     if self.steps_beyond_terminated == 0:
+        #         logger.warn(
+        #             "You are calling 'step()' even though this "
+        #             "environment has already returned terminated = True. You "
+        #             "should always call 'reset()' once you receive 'terminated = "
+        #             "True' -- any further steps are undefined behavior."
+        #         )
+        #     self.steps_beyond_terminated += 1
+        #     reward = 0.0
 
-        return np.array(self.state, dtype=np.float32), reward, terminated, False, {}
+        return np.array(self.state, dtype=np.float32), reward, terminated, False
 
     def reset(
         self,
@@ -206,8 +215,9 @@ class CartPoleEnv(gym.Env[np.ndarray, Union[int, np.ndarray]]):
         )  # default high
         self.state = self.np_random.uniform(low=low, high=high, size=(4,))
         self.steps_beyond_terminated = None
+        self.step_counter = 0
 
-        return np.array(self.state, dtype=np.float32), {}
+        return np.array(self.state, dtype=np.float32)
 
     def render(self):
         if self.render_mode is None:
@@ -314,3 +324,12 @@ class CartPoleEnv(gym.Env[np.ndarray, Union[int, np.ndarray]]):
             pygame.display.quit()
             pygame.quit()
             self.isopen = False
+
+    def envName(self):
+        return 'cartpole'
+    
+    def __str__(self):
+        return self.envName()
+    
+    def is_goal_reached(self):
+        return False

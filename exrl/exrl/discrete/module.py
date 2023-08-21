@@ -30,10 +30,7 @@ class Discrete:
         \rWINDOW = {self.window_size}
         """.strip()
 
-    def generate_table(self, *args, low=-1, high=0):
-        size = [*(self.size + 1), *args[:-2]]
+    def generate_table(self, low=-1, high=0):
         return np.random.uniform(
-            low=low,
-            high=high,
-            size=(size + [self.env.action_space.n])
+            low=low, high=high, size=([*(self.size + 1)] + [self.env.action_space.n])
         )
