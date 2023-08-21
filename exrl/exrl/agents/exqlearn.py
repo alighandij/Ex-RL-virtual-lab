@@ -27,9 +27,11 @@ class ExQLearning(Agent):
         count: int = 20,
         target: float = -120,
         break_on_solve: bool = True,
+        _tqdm=None,
     ) -> None:
         super().__init__(
             env,
+            "EX-RL Q-Learning",
             gamma,
             episodes,
             render_each,
@@ -43,6 +45,7 @@ class ExQLearning(Agent):
             target,
             reward_shaper,
             break_on_solve,
+            _tqdm,
         )
         self.hmm_step = self.reward_shaper.stp
         self.discrete = Discrete(env, discrete)

@@ -12,15 +12,15 @@ env_name = PipelinePage.env_name_selector(st)
 parameters = PipelinePage.env_parameters_selector(st, env_name)
 total_configs = PipelinePage.total_configs(st, parameters)
 
-Components.seperator(st)
+Components.separator(st)
 "## Q-Table Agent Training Configs"
 agent_configs = PipelinePage.agent_configs(st, env_name)
 
-Components.seperator(st)
+Components.separator(st)
 "### Output Configs"
 result_folder, save_path = PipelinePage.output_config(st)
 
-Components.seperator(st)
+Components.separator(st)
 "### Train"
 all_configs = PipelinePage.get_all_configs(env_name, parameters, agent_configs)
 PipelinePage.train(st, env_name, save_path, all_configs)

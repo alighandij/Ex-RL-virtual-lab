@@ -41,21 +41,17 @@ class History:
         return fig
 
     def log(self) -> dict:
-        r = round(self.rewards[-1], 3)
-        e = round(self.epsilons[-1], 3)
-        mr = np.mean(self.rewards[-self.w:])
-        lr = round(self.learning_rates[-1], 3)
         return {
-            "R": r,
-            "MR": mr,
-            "eps": e,
-            "lr": lr,
+            "Reward": round(self.rewards[-1], 3),
+            "Mean Reward": np.mean(self.rewards[-self.w:]),
+            "Epsilon": round(self.epsilons[-1], 3),
+            "Learning Rate": round(self.learning_rates[-1], 3),
         }
 
     def save(self, folder: str):
-        plots = os.path.join(folder, "history_plots.jpg")
-        rewards = os.path.join(folder, "history_rewards.npy")
-        epsilons = os.path.join(folder, "history_epsilons.npy")
+        plots = os.path.join(folder, "plots.jpg")
+        rewards = os.path.join(folder, "rewards.npy")
+        epsilons = os.path.join(folder, "epsilons.npy")
         learning_rates = os.path.join(folder, "learning_rates.npy")
         
         self.plot().savefig(plots)

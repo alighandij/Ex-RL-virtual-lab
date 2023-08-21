@@ -23,7 +23,7 @@ class Components:
         )
 
     @staticmethod
-    def seperator(st: streamlit):
+    def separator(st: streamlit):
         st.write("-" * 8)
 
     @staticmethod

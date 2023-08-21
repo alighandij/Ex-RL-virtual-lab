@@ -7,6 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from gym import Env
+from stqdm import stqdm
 from modules.pools import Pool
 from modules.utils import get_time_str, save_json
 from modules.components import Components
@@ -118,6 +119,7 @@ class ExRLPage:
         phase_map=None,
     ):
         configs = agent_configs.copy()
+        configs["_tqdm"] = stqdm
         configs["reward_shaper"] = reward_shaper
         if agent_type == "exrl":
             assert phase_map is not None
@@ -149,9 +151,7 @@ class ExRLPage:
         use_hmm_each_step: bool,
     ):
         reward_shaper_ql = None if use_env_reward else reward_one
-        reward_shaper_hmm = RewardShaperHMM(
-            hmm, env, phase_map, use_hmm_each_step
-        )
+        reward_shaper_hmm = RewardShaperHMM(hmm, env, phase_map, use_hmm_each_step)
         return reward_shaper_ql, reward_shaper_hmm
 
     def get_run_configs(st: streamlit, hmm_path: str):
@@ -162,9 +162,9 @@ class ExRLPage:
             + get_time_str()
         )
         result_folder = os.path.join(hmm_path, "Ex-RL", result_folder)
-        runs = int(cols[1].number_input(label="Total Runs", value=1))
-        save_each = int(cols[2].number_input(label="Save Each", value=20))
-        use_hmm_each_step = int(st.number_input("HMM Rewarding Steps", value=5))
+        runs = int(cols[1].number_input(label="Total Runs", value=10))
+        save_each = int(cols[2].number_input(label="Save Each", value=5))
+        use_hmm_each_step = int(st.number_input("HMM Rewarding Steps", value=10))
 
         return {
             "runs": runs,
@@ -357,7 +357,7 @@ class ExRLPage:
                 )
             )
 
-            episodes = int(st.number_input(label="Episodes", value=5000))
+            episodes = int(st.number_input(label="Episodes", value=10_000))
 
             discrete = (
                 int(
@@ -378,11 +378,11 @@ class ExRLPage:
             )
 
             epsilon_decay = float(
-                st.number_input(label="Epsilon Decay", value=0.9, format="%.5f")
+                st.number_input(label="Epsilon Decay", value=0.99, format="%.5f")
             )
 
             epsilon_min = float(
-                st.number_input(label="Epsilon Minimum", value=0.01, format="%.5f")
+                st.number_input(label="Epsilon Minimum", value=0.001, format="%.5f")
             )
 
         with cols[2]:
@@ -424,6 +424,7 @@ class ExRLPage:
 
         return {
             "gamma": gamma,
+            "discrete": discrete,
             "episodes": episodes,
             "lr": lr,
             "lr_min": lr_min,
@@ -431,11 +432,10 @@ class ExRLPage:
             "epsilon": epsilon,
             "epsilon_min": epsilon_min,
             "epsilon_decay": epsilon_decay,
-            "discrete": discrete,
             "count": count,
             "target": target,
             "break_on_solve": True,
-            "render_each": episodes + 1,  # IN ORDER TO AVOID RENDERING
+            "render_each": episodes + 1,
         }
 
     @staticmethod
@@ -459,8 +459,7 @@ class ExRLPage:
 
     @staticmethod
     def init_q_table(env: Env, agent_configs: dict):
-        agent = ExRLPage.get_agent(env, agent_configs, None, 0.0)
-        return np.copy(agent.q_table)
+        return np.copy(ExRLPage.get_agent(env, agent_configs, None, 0.0).q_table)
 
     @staticmethod
     def run_experiment(
@@ -477,8 +476,6 @@ class ExRLPage:
     ):
         args_save = (run, total, save_each, result_folder)
         q_table = ExRLPage.init_q_table(env, agent_configs)
-
-        st.write("Normal Q-Learning")
         ql_agent, ql_solve = ExRLPage.agent_train(
             q_table,
             env,
@@ -489,16 +486,16 @@ class ExRLPage:
         )
         ExRLPage.save_plots(*args_save, "QLearning", ql_agent)
 
-        st.write("Experience Based Q-Learning")
         reward_shaper_hmm.reset()
-        hmm_agent, hmm_solve = ExRLPage.agent_train(
+        exrl_agent, exrl_solve = ExRLPage.agent_train(
             q_table, env, agent_configs, reward_shaper_hmm, "exrl", phase_map
         )
         ExRLPage.save_plots(
-            *args_save, "ExperienceBasedQLearning", hmm_agent, reward_shaper_hmm
+            *args_save, "ExperienceBasedQLearning", exrl_agent, reward_shaper_hmm
         )
+        ExRLPage.plot_experiment(st, exrl_agent, ql_agent)
 
-        return ql_solve, hmm_solve
+        return ql_solve, exrl_solve
 
     @staticmethod
     def create_agent(env: Env, q_table: np.ndarray, decay: float, agent_config: dict):
@@ -506,6 +503,15 @@ class ExRLPage:
         agent = QLearning(env, **config)
         agent.q_table = q_table.copy()
         return agent
+
+    def plot_experiment(st: streamlit, exrl: ExQLearning, ql: QLearning):
+        ql_reward = pd.DataFrame({"Q-Learning": ql.history.rewards})
+        exrl_reward = pd.DataFrame({"EX-RL": exrl.history.rewards})
+        if len(ql_reward) > len(exrl_reward):
+            rewards = ql_reward.join(exrl_reward)
+        else:
+            rewards = exrl_reward.join(ql_reward)
+        st.line_chart(rewards)
 
     @staticmethod
     def run_experiments(
@@ -520,10 +526,11 @@ class ExRLPage:
         reward_shaper_hmm: RewardShaperHMM,
         **kwargs,
     ):
-        history = {"hmm": [], "ql": []}
+        history = {"EX-RL": [], "Normal Q-Learning": []}
 
         for run in range(runs):
-            ql, hmm = ExRLPage.run_experiment(
+            st.write(f"Run {run + 1} / {runs}")
+            ql, exrl = ExRLPage.run_experiment(
                 st=st,
                 env=env,
                 agent_configs=agent_configs,
@@ -535,8 +542,10 @@ class ExRLPage:
                 result_folder=result_folder,
                 phase_map=phase_map,
             )
-            history["ql"].append(ql)
-            history["hmm"].append(hmm)
+            history["EX-RL"].append(exrl)
+            history["Normal Q-Learning"].append(ql)
+            Components.separator(st)
+            print("-" * 50)
 
         return history
 

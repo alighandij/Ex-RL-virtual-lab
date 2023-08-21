@@ -1,15 +1,16 @@
-from gym import Env
-from types import FunctionType
-from exrl.history import History
 import numpy as np
-from tqdm import tqdm
+from gym import Env
 from abc import ABC, abstractmethod
+from types import FunctionType
+from tqdm.auto import tqdm
+from exrl.history import History
 
 
 class Agent(ABC):
     def __init__(
         self,
         env: Env,
+        name: str,
         gamma: float = 0.99,
         episodes: int = 20_000,
         render_each: int = 100_000,
@@ -23,9 +24,11 @@ class Agent(ABC):
         target: float = -120,
         reward_shaper: FunctionType = None,
         break_on_solve: bool = True,
+        _tqdm: tqdm = None,
     ) -> None:
         self.env = env
-
+        self.name = name
+        self.tqdm = _tqdm or tqdm
         self.gamma = gamma
         self.episodes = episodes
 
@@ -121,7 +124,7 @@ class Agent(ABC):
             pass
 
     def train(self) -> int:
-        pbar = tqdm(range(self.episodes), unit="Episode", ncols=100)
+        pbar = self.tqdm(range(self.episodes), unit="Episode", desc=self.name)
         for e in pbar:
             render = (e + 1) % self.render_each == 0
             r, obs = self.train_episode(render)
@@ -149,7 +152,7 @@ class Agent(ABC):
             total_reward += reward
             state = next_state
         return total_reward, observations
-    
+
     def get_reward(self, state, next_state, reward, done):
         if self.reward_shaper is None:
             return reward

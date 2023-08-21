@@ -11,21 +11,21 @@ pool_path, pool = Components.get_pool(st)
 folder = st.text_input(label="Result Folder", value="HMM") + "_" + get_time_str()
 result_path = os.path.join(pool_path, "HMMs", folder)
 
-Components.seperator(st)
+Components.separator(st)
 "## Config"
 n_components, n_iter, n_steps, _class, _class_name = HMMPage.get_configs(st)
 
-Components.seperator(st)
+Components.separator(st)
 "## Sequence Selection"
 selections = HMMPage.get_sequence_selection(st, pool)
 filters = HMMPage.filter_pool(st, pool, selections)
 
-Components.seperator(st)
+Components.separator(st)
 "## Sequence Encoder"
 encoder, encoder_name, encode_count = HMMPage.get_encoder(st, pool)
 st.write(f"Encode Count: {encode_count}")
 if st.button("Train"):
-    Components.seperator(st)
+    Components.separator(st)
     st.write("## Report")
     sequences = HMMPage.get_sequences(encoder, pool, filters, selections, n_steps)
     HMMPage.save_sequences(st, sequences, result_path)

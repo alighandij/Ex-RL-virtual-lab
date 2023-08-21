@@ -23,9 +23,11 @@ class QLearning(Agent):
         target: float = -120,
         reward_shaper: FunctionType = None,
         break_on_solve: bool = True,
+        _tqdm=None,
     ) -> None:
         super().__init__(
             env,
+            "Normal Q-Learning",
             gamma,
             episodes,
             render_each,
@@ -39,6 +41,7 @@ class QLearning(Agent):
             target,
             reward_shaper,
             break_on_solve,
+            _tqdm
         )
         self.discrete = Discrete(env, discrete)
         self.q_table = self.discrete.generate_table()

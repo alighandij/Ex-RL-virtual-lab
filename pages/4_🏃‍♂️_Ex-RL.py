@@ -4,9 +4,6 @@ from modules.components import Components
 from modules.environments import EnvSelector
 from modules.components.exrl import ExRLPage
 
-import tqdm
-import stqdm
-tqdm = stqdm
 
 ExRLPage.set_configs(st)
 "# 🏃‍♂️ Ex-RL"
@@ -14,24 +11,24 @@ ExRLPage.set_configs(st)
 
 pool, phase_map, sequences, hmm_model, hmm_config, hmm_path = ExRLPage.get_configs(st)
 
-Components.seperator(st)
+Components.separator(st)
 "## Agent Training Configs"
 agent_configs = ExRLPage.agent_configs(st, pool.env_name)
 
 
-Components.seperator(st)
+Components.separator(st)
 "## Environment Parameters"
 parameters, env_name = ExRLPage.env_parameters_selector(st, pool.env_name)
 env_maker = EnvSelector.get_env_maker(env_name)
 
 
-Components.seperator(st)
+Components.separator(st)
 "## Run Configs"
 run_configs = ExRLPage.get_run_configs(st, hmm_path)
 
 
 if st.button("Start Experiment"):
-    Components.seperator(st)
+    Components.separator(st)
     "## Results"
     env = env_maker(**parameters)
     reward_shaper_ql, reward_shaper_hmm = ExRLPage.init_experiment(
