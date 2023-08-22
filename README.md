@@ -120,6 +120,7 @@ Contributions to this project are welcome. If you have any ideas or suggestions,
 - [`pandas-dev/pandas`](https://github.com/pandas-dev/pandas)
 - [`streamlit/streamlit`](https://github.com/streamlit/streamlit)
 - [`matplotlib/matplotlib`](https://github.com/matplotlib/matplotlib)
+- [`mhyrzt/MultiMountains`](https://github.com/mhyrzt/MultiMountains)
 - modified version of [`simon-larsson/ballbeam-gym`](https://github.com/simon-larsson/ballbeam-gym)
 
 <a name="doc"></a>
@@ -226,7 +227,6 @@ Describe your environment using the provided structure.
 
 ```python
 from .create import create
-from .reward import reward_shaper
 from .encoder import ENCODERS
 
 YOUR_ENV = {
@@ -244,7 +244,6 @@ YOUR_ENV = {
             "count": 20,
             "target": -120
             "discrete": 32,
-            "reward_shaper": reward_shaper
         },
         "encoders": ENCODERS
     }
