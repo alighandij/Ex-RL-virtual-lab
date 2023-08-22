@@ -32,7 +32,9 @@
   - [`encoders`](#encoders)
   - [Encoder](#encoder)
   - [`__init__.py`](#init)
-  - [🖊️ Register & `EnvSelector`](#register)
+  - [Register](#register)
+  - [`EnvSelector`](#envselector)
+
 
 <a name="setup"></a>
 
@@ -255,7 +257,7 @@ YOUR_ENV = {
 
 <a name="register"></a>
 
-### 🖊️ Register
+### Register
 
 After adding your agents, register your environment in `modules/environments/selector.py` as follows:
 
@@ -266,6 +268,8 @@ ENVIRONMENTS = {
     **YOUR_ENV,
 }
 ```
+
+<a name="envselector"></a>
 
 ### `EnvSelector`
 
