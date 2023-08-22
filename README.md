@@ -46,13 +46,11 @@
 <a name="manual"></a>
 
 ```bash
-git clone https://github.com/mhyrzt/ballbeam-gym.git
 git clone https://github.com/alighandij/Ex-RL-virtual-lab.git 
 cd Ex-RL-virtual-lab
 python3 -m venv venv
-# activate virtual environment
-python3 -m pip install ./exrl
-python3 -m pip install ../ballbeam-gym
+# Activate the virtual environment based on your OS
+pip3 install gym && pip3 install -r requirements.txt
 streamlit run App.py
 ```
 
