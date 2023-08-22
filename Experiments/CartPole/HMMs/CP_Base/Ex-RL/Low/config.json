@@ -1,0 +1,38 @@
+{
+    "agent": {
+        "gamma": 0.99,
+        "discrete": [
+            8,
+            8,
+            8,
+            8
+        ],
+        "episodes": 10000,
+        "lr": 1.0,
+        "lr_min": 0.01,
+        "lr_decay": 0.999,
+        "epsilon": 0.5,
+        "epsilon_min": 0.0,
+        "epsilon_decay": 0.9,
+        "count": 1000,
+        "target": 200.0,
+        "break_on_solve": true,
+        "render_each": 10001
+    },
+    "environment": {
+        "name": "Cart Pole V1",
+        "parameters": {
+            "gravity": 9.8,
+            "masscart": 1.0,
+            "masspole": 0.1,
+            "force_mag": 10.0
+        }
+    },
+    "run_configs": {
+        "runs": 20,
+        "save_each": 5,
+        "result_folder": "/media/mahyar/Personal/Projects/Ex-RL-virtual-lab/Experiments/CartPole/HMMs/CP_Base/Ex-RL/QL_HMM_Result_2023-Aug-22-19-15-28",
+        "use_env_reward": true,
+        "use_hmm_each_step": 200
+    }
+}
