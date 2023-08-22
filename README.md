@@ -149,6 +149,7 @@ your_awesome_env
 ### `create.py`
 
 This file should contain a function called `create` for creating and customizing the environments.
+
 _**⚠️NOTE**_: Avoid using `gym.create`instead, refer to the source code from OpenAI Gym unless it supports direct customization (as demonstrated in the `cartpole` example).
 
 ```python
