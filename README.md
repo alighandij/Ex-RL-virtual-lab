@@ -150,7 +150,7 @@ your_awesome_env
 
 This file should contain a function called `create` for creating and customizing the environments.
 
-_**⚠️NOTE**_: Avoid using `gym.create`instead, refer to the source code from OpenAI Gym unless it supports direct customization (as demonstrated in the `cartpole` example).
+_**⚠️ NOTE**_: Avoid using `gym.create`instead, refer to the source code from OpenAI Gym unless it supports direct customization (as demonstrated in the `cartpole` example).
 
 ```python
 def create(**kwargs):
@@ -167,7 +167,7 @@ def create(**kwargs):
     return env
 ```
 
-_**⚠️NOTE**_: When using gym environments with the latest version of Gymnasium, make sure to wrap them using `GymWrapper` from `exrl.gym_wrapper`.
+_**⚠️ NOTE**_: When using gym environments with the latest version of Gymnasium, make sure to wrap them using `GymWrapper` from `exrl.gym_wrapper`.
 
 <a name="encoders"></a>
 

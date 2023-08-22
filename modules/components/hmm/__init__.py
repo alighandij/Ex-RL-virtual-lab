@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from stqdm import stqdm
-from hmmlearn.hmm import PoissonHMM, MultinomialHMM, GaussianHMM, GMMHMM
+from hmmlearn.hmm import PoissonHMM, MultinomialHMM
 from modules.pools import Pool
 from modules.utils import get_time_str, heatmap, save_json
 from exrl.hmm_model import HMMModel
@@ -52,8 +52,6 @@ class HMMPage:
         _class_dict = {
             "Poisson": PoissonHMM,
             "Multinomial": MultinomialHMM,
-            "Gaussian": GaussianHMM,
-            "Gaussian Mixture": GMMHMM,
         }
         _class_name = cols[0].selectbox(
             label="HMM Type",

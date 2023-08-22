@@ -36,6 +36,7 @@ class HMMModel:
             verbose=verbose,
             random_state=random_state,
             n_components=n_components,
+            startprob_prior=np.ones(n_components) / n_components,
             **hmm_params
         )
 
