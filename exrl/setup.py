@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 setup(
     name="exrl",
     packages=find_packages(),
-    version="1.4.26",
+    version="1.4.28",
     description="Ex-RL Library",
     author="Ali Ghandi, Azam Kamranian, Mahyar Riazati",
     license="MIT",

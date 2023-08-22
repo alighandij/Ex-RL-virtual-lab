@@ -37,8 +37,10 @@ class HMMModel:
             random_state=random_state,
             n_components=n_components,
             startprob_prior=np.ones(n_components) / n_components,
+            init_params="te",
             **hmm_params
         )
+        self.model.startprob_ = np.ones(n_components) / n_components
 
     def fit(self):
         self.model.fit(X=self.X, lengths=self.lengths)
