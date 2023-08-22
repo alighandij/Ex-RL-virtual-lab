@@ -19,25 +19,20 @@
 
 - [⚙️ Setup](#setup)
 - [📄 Pages](#pages)
+  - [👷 Pipeline QTable](#pipeline)
+  - [🎮 Review Agent](#review)
+  - [🕵️ HMM Trainer](#hmm)
+  - [🏃‍♂️ Ex-RL](#exrl)
 - [👥 Contributors](#contributors)
 - [🗣️ Citation](#citation)
 - [🤝 Contributing](#contributing)
 - [📚 Libraries](#libraries)
-
-* <details>
-      <summary>
-          <a href="#doc">
-          🔨 Environment Documentation
-          </a>
-      </summary>
-
-    - [`create.py`](#createpy)
-    - [`encoders`](#encoders)
-    - [Encoder](#encoder)
-    - [`__init__.py`](#init)
-    - [🖊️ Register & `EnvSelector`](#register)
-
-</details>
+- [🔨 Environment Documentation](#doc)
+  - [`create.py`](#createpy)
+  - [`encoders`](#encoders)
+  - [Encoder](#encoder)
+  - [`__init__.py`](#init)
+  - [🖊️ Register & `EnvSelector`](#register)
 
 <a name="setup"></a>
 
@@ -58,11 +53,15 @@ streamlit run App.py
 
 ## 📄 Pages
 
+<a name="pipeline"></a>
+
 ### 👷 Pipeline QTable
 
 for Training `QTableAgents` with customized environments.
 
 ![pipeline](./assets/pipeline.gif)
+
+<a name="review"></a>
 
 ### 🎮 Review Agent
 
@@ -70,13 +69,17 @@ To view information about an agent and play it.
 
 ![review](assets/review.gif)
 
+<a name="hmm"></a>
+
 ### 🕵️ HMM Trainer
 
 For training an HMM based on trained `QTableAgents`.
 
 ![hmm](assets/hmm.gif)
 
-### 🏃‍♂️Ex-RL
+<a name="exrl"></a>
+
+### 🏃‍♂️ Ex-RL
 
 To execute an Ex-RL algorithm with a trained HMM in a different environment.
 
@@ -267,4 +270,3 @@ ENVIRONMENTS = {
 ### `EnvSelector`
 
 the `EnvSelector` allows you to effortlessly access environment configurations. This streamlined tool grants you quick access to a variety of settings and parameters associated with different environments.
-
