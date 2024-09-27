@@ -102,7 +102,19 @@ The contributors, listed in chronological order, are:
 ## 🗣️ Citation
 
 ```bibtex
-
+@article{GHANDI2025121479,
+  title     = {Ex-RL: Experience-based reinforcement learning},
+  journal   = {Information Sciences},
+  volume    = {689},
+  pages     = {121479},
+  year      = {2025},
+  issn      = {0020-0255},
+  doi       = {https://doi.org/10.1016/j.ins.2024.121479},
+  url       = {https://www.sciencedirect.com/science/article/pii/S0020025524013938},
+  author    = {Ali Ghandi and Saeed Bagheri Shouraki and Iman Gholampour and Azam Kamranian and Mahyar Riazati},
+  keywords  = {Reinforcement learning, Transfer-learning, Experience-based learning, Meta-learning},
+  abstract  = {Reinforcement learning (RL) has achieved significant success across various tasks. However, generalizing RL for similar tasks remains a challenge. This study leverages expertise from related tasks to introduce a novel algorithm, Ex-RL, for executing transfer learning in tabular RL. The methodology concentrates on abstracting previous experiences into descriptive data and utilizing such data for similar tasks. The research focuses on classic RL solutions for balancing and anti-balancing, which improve the sample efficiency of the learning process. Studies indicate that weak learners, such as Q-learning, require fewer learning episodes, resulting in a 50% improvement and a higher success rate in the learning process. An online virtual lab was developed to facilitate the execution of the experiments. The code is available at Github.}
+}
 ```
 
 <a name="contributing"></a>
